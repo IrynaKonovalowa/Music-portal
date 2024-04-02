@@ -107,5 +107,12 @@ namespace Music_portal.Controllers
 
             return View(reg);
         }
+
+        public IActionResult CheckEmail(string email)
+        {
+            if (email == "admin@mail.ru" || email == "admin@gmail.com")
+                return Json(false);
+            return Json(true);
+        }
     }
 }
