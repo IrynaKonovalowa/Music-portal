@@ -12,5 +12,7 @@
         public virtual Genre? Genre{ get; set; }
 
         public virtual Singer? Singer { get; set; }
+
+        public virtual User? User { get; set; }
     }
 }

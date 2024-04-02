@@ -12,6 +12,6 @@ namespace Music_portal.Models
         public string Password { get; set; }
         public int Access { get; set; }
         public string? Salt { get; set; }
-
+        public virtual ICollection<Song>? Songs { get; set; }
     }
 }
