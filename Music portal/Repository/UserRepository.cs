@@ -22,7 +22,7 @@ namespace Music_portal.Repository
         {
             var usersContext = _context.Users.Where(m => m.Login == login);
 
-            return await usersContext.FirstAsync();
+            return await usersContext.FirstOrDefaultAsync();
         }
 
         public async Task CreateUs(User u)
