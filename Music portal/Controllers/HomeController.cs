@@ -1,32 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Music_portal.Models;
+using Music_portal.Repository;
 using System.Diagnostics;
 
 namespace Music_portal.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
+        IUserRepository repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IUserRepository r)
         {
-            _logger = logger;
+            repo = r;
         }
 
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        }        
     }
 }
