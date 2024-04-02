@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Music_portal.Models
 {
@@ -12,6 +13,8 @@ namespace Music_portal.Models
         [Required(ErrorMessage = "Field must be set!")]
         public string? Login { get; set; }
         [Required(ErrorMessage = "Field must be set!")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Incorrect email")]
+        [Remote(action: "CheckEmail", controller: "Account", ErrorMessage = "Email already in use")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Field must be set!")]
