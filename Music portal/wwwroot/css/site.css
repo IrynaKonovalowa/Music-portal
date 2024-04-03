@@ -17,6 +17,96 @@ html {
   min-height: 100%;
 }
 
+@font-face {
+    font-family: Kalnia;
+    src: url(/css/Kalnia.ttf);
+}
+
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.MusPortal {
+    text-align: left;
+    color: blueviolet;
+    text-shadow: 1px 2px 2px white;
+    font-style: italic;
+    font-size: 58px;
+    font-weight: bold;
+    font-family: Kalnia;
+}
+
+.head {
+    display: flex;
+    background-color: #050a5f;
+    padding: 5px;
+    margin: 0px 0px 3px 0px;
+}
+.hello {
+    color:whitesmoke;
+    font-weight:bold;
+    font-size: 24px;
+}
+
+th, td{
+    color:whitesmoke;
+}
+
+.myContainer {
+    background-color: #050a5f;
+    padding: 35px;
+    margin: 0px 0px 350px 0px;
+}
+
+.table{
+    width:500px;
+}
+
+.gif {
+    width: 385px;
+    height: 75px;
+    background-image: url(/Gif/anim2.gif);
+}
+.but {
+    display: inline-block;
+    border: 2px solid violet;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px white inset;
+    margin: 5px;
+    padding: 3px 11px 3px 11px;    
+}
+
+.link {
+    text-align: center;
+    color: blue;
+    text-decoration: none;
+}
+.name {
+    font-size: 32px;
+    color: white;
+    font-family: Kalnia;
+    text-shadow: 1px 2px 2px white;
+    width: max-content;
+    height: max-content;
+    margin-bottom: 30px;
+    padding: 3px;
+}
+.labl{
+    color: whitesmoke;
+}
+
+.sub {
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    color: blue;
+    font-size: 18px;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0px;
+    font-size: 1rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
