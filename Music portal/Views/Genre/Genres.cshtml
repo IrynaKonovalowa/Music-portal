@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Music_portal.Models.Genre>
+
+@{
+    ViewData["Title"] = "Genres";
+}
+<div class="name">Genres</div>
+<hr />
+
+    <div class="but">
+        <a class="link" asp-controller="Genre" asp-action="CreateGenre">Add Genre</a>
+    </div>
+
+<div class="text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>                    
+                </tr> 
+            }
+        }
+        </tbody>
+    </table>
+</div>
