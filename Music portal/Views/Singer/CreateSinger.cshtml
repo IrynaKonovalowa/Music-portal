@@ -1,0 +1,38 @@
+﻿@model Music_portal.Models.Singer
+
+@{
+    ViewData["Title"] = "CreateSinger";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="name">Add singer:</div>
+    <div>
+        <div class="col-md-4">
+            <form asp-action="CreateSinger" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label labl"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <br />
+                <div style=" display:flex">
+                    <div class=" but">
+                        <input class ="sub" type="submit" value="Save" />
+                    </div>
+                    <div class="but">
+                        <a asp-action="Singers" style="color:ghostwhite; text-decoration:none">Back to the list</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+   
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
