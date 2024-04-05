@@ -19,6 +19,12 @@ namespace Music_portal.Repository
             return await genreContext.ToListAsync();
         }
 
+        public List<Genre> Genres()
+        {
+            var genreContext = _context.Genres;
+            return genreContext.ToList();
+        }
+
         public async Task<Genre> GetGenre(int id)
         {
             return await _context.Genres.FindAsync(id);

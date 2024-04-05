@@ -6,6 +6,7 @@ namespace Music_portal.Repository
     public interface IGenreRepository
     {
         Task<List<Genre>> GetGenreList();
+        public List<Genre> Genres();
         Task<Genre> GetGenre(int id);
         Task CreateGenre(Genre item);
         Task Save();
