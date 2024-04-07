@@ -1,0 +1,29 @@
+﻿@model Music_portal.Models.Singer
+
+@{
+    ViewData["Title"] = "DeleteSinger";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="name">Delete singer:</div>
+
+<h3 class="del">Are you sure you want to delete this singer?</h3>
+<br />
+<div>
+    <h4 class="del">Singer:</h4>
+        <div class = "del">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    <br />
+    <form asp-action="DeleteSinger">
+        <input type="hidden" asp-for="Id" />        
+        <div style=" display:flex">
+            <div class=" but">
+                <input class="sub" type="submit" value="Delete" />
+            </div>
+            <div class="but">
+                <a asp-action="Singers" class="link">Back to the list</a>
+            </div>
+        </div>    
+    </form>
+</div>
