@@ -12,7 +12,6 @@ namespace Music_portal.Repository
         {
             _context = context;
         }
-
         public async Task<List<Singer>> GetSingerList()
         {
             var singerContext = _context.Singers;
@@ -32,6 +31,16 @@ namespace Music_portal.Repository
         public async Task CreateSinger(Singer g)
         {
             await _context.Singers.AddAsync(g);
+        }
+        public void Update(Singer s)
+        {
+            _context.Entry(s).State = EntityState.Modified;
+        }
+        public async Task Delete(int id)
+        {
+            Singer? s = await _context.Singers.FindAsync(id);
+            if (s != null)
+                _context.Singers.Remove(s);
         }
 
         public async Task Save()

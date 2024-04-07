@@ -9,6 +9,8 @@ namespace Music_portal.Repository
         public List<Singer> Singers();
         Task<Singer> GetSinger(int id);
         Task CreateSinger(Singer item);
+        public Task Delete(int id);
+        void Update(Singer item);
         Task Save();
     }
 }
