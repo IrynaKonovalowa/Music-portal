@@ -33,8 +33,17 @@ namespace Music_portal.Repository
         {
             await _context.Genres.AddAsync(g);
         }
-
-        public async Task Save()
+        public void Update(Genre g)
+        {
+            _context.Entry(g).State = EntityState.Modified;
+        }
+		public async Task Delete(int id)
+		{
+			Genre? g = await _context.Genres.FindAsync(id);
+			if (g != null)
+				_context.Genres.Remove(g);
+		}
+		public async Task Save()
         {
             await _context.SaveChangesAsync();
         }

@@ -9,6 +9,8 @@ namespace Music_portal.Repository
         public List<Genre> Genres();
         Task<Genre> GetGenre(int id);
         Task CreateGenre(Genre item);
+        public Task Delete(int id);
+		void Update(Genre item);
         Task Save();
     }
 }
