@@ -11,7 +11,7 @@
     </div>
 
 <div class="text-center">
-    <table class="table">
+    <table class="table" style="width: 500px;">
         <thead>
             <tr>
                 <th>
@@ -27,10 +27,17 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
-                    </td>                    
+                    </td>
+                        <td>
+                            <a asp-action="EditSinger" asp-route-id="@item.Id" class="link">Edit</a> |
+                            <a asp-action="DeleteSinger" asp-route-id="@item.Id" class="link">Delete</a>
+                        </td>
                 </tr> 
             }
         }
         </tbody>
     </table>
+</div>
+<div class="but" style=" margin-left: 330px;">
+    <a asp-controller="Home" asp-action="Index" class="link">Back to list of songs</a>
 </div>
