@@ -1,0 +1,39 @@
+﻿@model Music_portal.Models.Genre
+
+@{
+    ViewData["Title"] = "EditGenre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="name">Edit genre:</div>
+    <div>
+        <div class="col-md-4">
+            <form asp-action="EditGenre" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label labl"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <br />
+                <div style=" display:flex">
+                    <div class=" but">
+                        <input class ="sub" type="submit" value="Save" />
+                    </div>
+                    <div class="but">
+                        <a asp-action="Genres" class="link">Back to the list</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+   
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
