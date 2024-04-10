@@ -11,7 +11,7 @@ namespace Music_portal.Models
         public int Year{ get; set; }
         
         public string? PathToFile { get; set; }
-        
+
         public int GenreId {  get; set; }
 
         public int SingerId { get; set; }
