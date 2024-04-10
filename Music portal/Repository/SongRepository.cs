@@ -27,6 +27,16 @@ namespace Music_portal.Repository
         {
             await _context.Songs.AddAsync(s);
         }
+        public void Update(Song s)
+        {
+            _context.Entry(s).State = EntityState.Modified;
+        }
+        public async Task Delete(int id)
+        {
+            Song? s = await _context.Songs.FindAsync(id);
+            if (s != null)
+                _context.Songs.Remove(s);
+        }
 
         public async Task Save()
         {

@@ -8,6 +8,8 @@ namespace Music_portal.Repository
         Task<List<Song>> GetSongList();
         Task<Song> GetSong(int id);
         Task CreateSong(Song item);
+        public Task Delete(int id);
+        void Update(Song item);
         Task Save();
     }
 }
