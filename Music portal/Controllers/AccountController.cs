@@ -26,7 +26,7 @@ namespace Music_portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (repo.GetUserList() == null)
+                if (await repo.GetUserList() == null)
                 {
                     ModelState.AddModelError("", "Wrong login or password!");
                     return View(logon);
@@ -37,7 +37,7 @@ namespace Music_portal.Controllers
                     ModelState.AddModelError("", "Wrong login or password!");
                     return View(logon);
                 }
-                //var user = users.First();
+                
                 string? salt = user.Salt;
 
                 //переводим пароль в байт-массив  
@@ -55,7 +55,9 @@ namespace Music_portal.Controllers
                     ModelState.AddModelError("", "Wrong login or password!");
                     return View(logon);
                 }
-                HttpContext.Session.SetString("Login", user.Login);
+
+                HttpContext.Session.SetString("Acces", user.Access.ToString());
+                HttpContext.Session.SetString("Login", user.Login);                
                 return RedirectToAction("Index", "Home");
             }
             return View(logon);
@@ -68,51 +70,80 @@ namespace Music_portal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(RegisterModel reg)
+        public async Task<IActionResult> Register(RegisterModel reg)
         {
             if (ModelState.IsValid)
             {
-                User user = new User();
-                user.FirstName = reg.FirstName;
-                user.LastName = reg.LastName;
-                user.Email = reg.Email;
-                user.Login = reg.Login;
+                if (await repo.GetUser(reg.Login) != null)
+                {    
+                     if (reg.Login == "admin")
+						 ModelState.AddModelError("", "It's not possible to register under the login admin!");
+                     else                                
+					     ModelState.AddModelError("", "This login is already taken!");
+                     return View(reg);
+                }                  
+               
+                else
+                {
+                    User user = new User();
+                    user.FirstName = reg.FirstName;
+                    user.LastName = reg.LastName;
+                    user.Email = reg.Email;
+                    user.Login = reg.Login;
 
-                byte[] saltbuf = new byte[16];
+					if (reg.Login == "admin")
+                        user.Access = 2;
 
-                RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
-                randomNumberGenerator.GetBytes(saltbuf);
+						byte[] saltbuf = new byte[16];
 
-                StringBuilder sb = new StringBuilder(16);
-                for (int i = 0; i < 16; i++)
-                    sb.Append(string.Format("{0:X2}", saltbuf[i]));
-                string salt = sb.ToString();
+                    RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
+                    randomNumberGenerator.GetBytes(saltbuf);
 
-                //переводим пароль в байт-массив  
-                byte[] password = Encoding.Unicode.GetBytes(salt + reg.Password);
+                    StringBuilder sb = new StringBuilder(16);
+                    for (int i = 0; i < 16; i++)
+                        sb.Append(string.Format("{0:X2}", saltbuf[i]));
+                    string salt = sb.ToString();
 
-                //вычисляем хеш-представление в байтах  
-                byte[] byteHash = SHA256.HashData(password);
+                    //переводим пароль в байт-массив  
+                    byte[] password = Encoding.Unicode.GetBytes(salt + reg.Password);
 
-                StringBuilder hash = new StringBuilder(byteHash.Length);
-                for (int i = 0; i < byteHash.Length; i++)
-                    hash.Append(string.Format("{0:X2}", byteHash[i]));
+                    //вычисляем хеш-представление в байтах  
+                    byte[] byteHash = SHA256.HashData(password);
 
-                user.Password = hash.ToString();
-                user.Salt = salt;
-                repo.CreateUs(user);
-                repo.Save();
-                return RedirectToAction("Login");
+                    StringBuilder hash = new StringBuilder(byteHash.Length);
+                    for (int i = 0; i < byteHash.Length; i++)
+                        hash.Append(string.Format("{0:X2}", byteHash[i]));
+
+                    user.Password = hash.ToString();
+                    user.Salt = salt;
+                    await repo.CreateUs(user);
+                    await repo.Save();
+                    return RedirectToAction("Login");
+                }
             }
 
             return View(reg);
         }
 
-        public IActionResult CheckEmail(string email)
+        public async Task<IActionResult> CheckEmail(string email)
+        {        
+        if(await repo.GetUserList() != null)
+            {
+                foreach (var user in await repo.GetUserList())
+                {
+                    if (user.Email == email)
+                    {
+                        return Json(false);
+                    }
+                }
+            }             
+           return Json(true);
+       }
+
+        public ActionResult Logout()
         {
-            if (email == "admin@mail.ru" || email == "admin@gmail.com")
-                return Json(false);
-            return Json(true);
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Account");
         }
     }
 }
