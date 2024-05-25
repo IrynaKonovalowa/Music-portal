@@ -1,13 +1,24 @@
-﻿@model IEnumerable<Music_portal.Models.Song>
+﻿@* @model IEnumerable<Music_portal.Models.Song> *@
+@using Music_portal.Models
+@model Music_portal.Models.IndexViewModel
+@using Music_portal.TagHelpers
 
 @{
-    ViewData["Title"] = "Songs";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div style="margin-left: 1100px;" class="search">
+    <form asp-action="SearchSong">
+        <input type="text" name="search" placeholder="Search a song" />
+        <button type="submit" />
+    </form>
+</div>
 
 
 @if (Context.Session.GetString("Acces") == "2" || Context.Session.GetString("Login") == "admin")
 { 
-    <div style="display: flex; margin-left: 1100px;">    
+    <div style="display: flex; margin-left: 600px;">    
     <div class="but">
         <a class="link" asp-controller="Genre" asp-action="Genres">Genres</a>
     </div>
@@ -34,28 +45,53 @@
 }
 
 <br />
+<form method="get">    
+    <div style="display: flex; vertical-align: bottom; margin-left: 95px;">
+        <div >
+        <label class="control-label labl filtlabl">Singer: </label>
+        <select class="form-control filt" name="singer" asp-items="Model.FilterViewModel.Singers"></select>
+        </div>
+        <div >
+            <label class="control-label labl filtlabl">Genre: </label>
+        <select class="form-control filt" name="genre" asp-items="Model.FilterViewModel.Genres"></select>
+        </div>
+        <div class="divbutfilt">
+            <input type="submit" class="butfilt" value="Filter" />
+        </div>
+
+    </div>
+</form>
+<br />
 <div class="text-center">
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
+                    property="@Model.SortViewModel.TitleSort">Title
+                    </sort-header>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Singer)
+                    <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
+                    property="@Model.SortViewModel.SingerSort">Singer
+                    </sort-header>
+                </th>               
+                <th>
+                    <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
+                    property="@Model.SortViewModel.GenreSort"> Genre
+                    </sort-header>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Genre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Year)
+                    <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
+                    property="@Model.SortViewModel.YearSort"> Year
+                    </sort-header>
                 </th>                
             </tr>
         </thead>
         <tbody>
             @if (Model != null)
             {
-                @foreach (var item in Model)
+                @foreach (var item in Model.Songs)
                 {
                     <tr>
                         <td>
@@ -86,12 +122,15 @@
                             @if (Context.Session.GetString("Login") == "admin")
                             {   
                                 <a asp-controller = "Home" asp-action = "DeleteSong" asp-route-id = "@item.Id" class="link">Delete</a> 
-                            }                            
-
+                            }
                             </td>                        
                 </tr> 
             }
         }
         </tbody>
     </table>
-</div>
+    </div>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-singer="@(Model.FilterViewModel.SelectedSinger)"
+           page-url-genre="@(Model.FilterViewModel.SelectedGenre)"
+           page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
