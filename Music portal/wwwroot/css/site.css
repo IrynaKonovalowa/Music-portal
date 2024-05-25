@@ -21,6 +21,10 @@ html {
     font-family: Kalnia;
     src: url(/css/Kalnia.ttf);
 }
+@font-face {
+    font-family: rock-x-start;
+    src: url(/css/rock-x-start.ttf);
+}
 
 body {
     margin-bottom: 60px;
@@ -28,19 +32,19 @@ body {
 
 .MusPortal {
     text-align: left;
+    align-items: end;
     color: blueviolet;
-    text-shadow: 1px 2px 2px white;
-    font-style: italic;
-    font-size: 58px;
-    font-weight: bold;
-    font-family: Kalnia;
+    text-shadow: 1px 2px 2px white;    
+    font-size: 58px;    
+    font-family: rock-x-start;
+    padding: 0px;
 }
 
 .head {
     display: flex;
     background-color: #050a5f;
-    padding: 5px;
-    margin: 0px 0px 3px 0px;
+    margin: 0px;
+    padding: 0px;
 }
 .hello {
     color: whitesmoke;
@@ -50,9 +54,54 @@ body {
     font-style: italic;
 }
 
-th, td{
-    color:whitesmoke;     
+* {
+    box-sizing: border-box;
 }
+
+.search {
+    background-color: transparent;
+    width: 350px;
+}
+    .search form {
+       position: relative;
+        width: 300px;
+        margin: 0 auto;
+    }
+    .search input {
+        width: 100%;
+        height: 36px;
+        padding-left: 10px;
+        border: 2px solid #f536f5;
+        border-radius: 15px;
+        outline: none;
+        background-color: whitesmoke;
+        color: #9E9C9C;
+    }
+
+    .search button {
+        position: absolute;
+        top: 0;
+        right: 0px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        background-image: url(/Search/lupa.png);
+        background-size: contain;
+        border-radius: 0 15px 15px 0;
+        cursor: pointer;
+        border: 2px solid #f536f5;
+    }
+
+        .search button:before {
+            content: "\f002";
+            font-family: FontAwesome;
+            font-size: 16px;
+            color: #F9F0DA;
+        }
+
+th, td {
+        color: whitesmoke;
+    }
 th{
     font-size: 20px;
 }
@@ -77,6 +126,7 @@ audio {
     width: 385px;
     height: 75px;
     background-image: url(/Gif/anim2.gif);
+   margin-bottom: 20px;
 }
 .but {
     display: inline-block;
@@ -170,7 +220,8 @@ dt,dd{
 
 
 .animated-button1 {
-    background: linear-gradient(-30deg, #3a25a7 50%, #5a1c99 50%);
+    /*background: linear-gradient(-30deg, #3a25a7 50%, #5a1c99 50%);*/
+    background-color: #050a5f;
     padding: 5px 15px;
     margin: 12px;
     display: inline-block;
@@ -300,4 +351,56 @@ dt,dd{
     }
 }
 
+.glyphicon {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin: 0 5px;
+}
+
+.glyphicon-chevron-down {
+    transform: rotate(45deg);
+}
+
+.glyphicon-chevron-up {
+    transform: rotate(-135deg);
+}
+/*.glyphicon {
+    display: inline-block;
+    padding: 0 5px;
+}
+
+.glyphicon-chevron-right:after {
+    content: "\00BB";
+}
+
+.glyphicon-chevron-left:before {
+    content: "\00AB";
+}
+*/
+.filt {
+    width: 260px;
+    margin: 0 10px 10px 10px;
+    height: 35px;
+    display: inline-block;
+}
+.filtlabl {
+    width: 50px;
+    display: inline-block;
+}
+.butfilt {
+    background-color: transparent;
+    color: whitesmoke;
+    border: 0px solid transparent;    
+}
+
+.divbutfilt {
+    display: inline-block;
+    border: 2px solid violet;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px white inset;
+    margin: 0 10px 10px 15px;
+    padding: 3px 11px 3px 11px;
+}
 
