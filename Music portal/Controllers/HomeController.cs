@@ -26,10 +26,56 @@ namespace Music_portal.Controllers
 			_appEnvironment =appEnvironment;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(/*string singer,*/ int singer = 0, int genre = 0, int page = 1,
+            SortState sortOrder = SortState.TitleAsc)
         {
-            var model = await repo.GetSongList();
-            return View(model);
+
+            //var model = await repo.GetSongList();
+            //return View(model);
+
+            int pageSize = 5;
+
+            //фильтрация
+            IQueryable<Song> songs = await repo.GetSongList();
+
+            if (genre != 0)
+            {
+                songs = songs.Where(p => p.GenreId == genre);
+            }
+            //if (!string.IsNullOrEmpty(singer))
+            //{
+            //    songs = songs.Where(p => p.Singer == singer);
+            //}
+            if (singer != 0)
+            {
+                songs = songs.Where(p => p.SingerId == singer);
+            }
+
+            // сортировка
+            songs = sortOrder switch
+            {
+                SortState.TitleDesc => songs.OrderByDescending(s => s.Title),
+                SortState.SingerAsc => songs.OrderBy(s => s.Singer!.Name),
+                SortState.SingerDesc => songs.OrderByDescending(s => s.Singer!.Name),
+                SortState.GenreAsc => songs.OrderBy(s => s.Genre!.Name),
+                SortState.GenreDesc => songs.OrderByDescending(s => s.Genre!.Name),
+                SortState.YearAsc => songs.OrderBy(s => s.Year),
+                SortState.YearDesc => songs.OrderByDescending(s => s.Year),                
+                _ => songs.OrderBy(s => s.Title),
+            };
+
+            // пагинация
+            var count = await songs.CountAsync();
+            var items = await songs.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            // формируем модель представления
+            IndexViewModel viewModel = new IndexViewModel(
+                items,
+                new PageViewModel(count, page, pageSize),
+                new FilterViewModel(await gRepo.GetGenreList(), await sRepo.GetSingerList(), genre, singer),
+                new SortViewModel(sortOrder)
+            );
+            return View(viewModel);
         }
 
         public IActionResult CreateSong()
@@ -146,7 +192,7 @@ namespace Music_portal.Controllers
 
         private async Task<bool> SongExists(int id)
         {
-            List<Song> list = await repo.GetSongList();
+            IQueryable<Song> list = await repo.GetSongList();
             return (list?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
