@@ -36,7 +36,7 @@ namespace Music_portal.Models
                 Songs?.Add(new Song { Title="Smells like teen spirit", Genre = genre1, Singer = singer2, Year = 1991, PathToFile="/Songs/smells-like-teen-spirit-nirvana.mp3" });
                 Songs?.Add(new Song { Title="It's my life", Genre = genre1, Singer = singer3, Year = 2000, PathToFile="/Songs/it's-my-life-bon-jovi.mp3" });
                 Songs?.Add(new Song { Title="Never say goodbye", Genre = genre1, Singer = singer3, Year = 1986, PathToFile="/Songs/never-say-goodbye-bon-jovi.mp3" });
-                               
+
                 SaveChanges();
             }
         }
