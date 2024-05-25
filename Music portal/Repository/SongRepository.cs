@@ -13,10 +13,10 @@ namespace Music_portal.Repository
             _context = context;
         }
 
-        public async Task<List<Song>> GetSongList()
+        public async Task<IQueryable<Song>> GetSongList()
         {
             var songContext = _context.Songs;
-            return await songContext.ToListAsync();
+            return songContext;
         }
 
         public async Task<Song> GetSong(int id)

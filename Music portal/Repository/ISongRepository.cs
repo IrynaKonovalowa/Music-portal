@@ -5,7 +5,7 @@ namespace Music_portal.Repository
 {
     public interface ISongRepository
     {
-        Task<List<Song>> GetSongList();
+        Task<IQueryable<Song>> GetSongList();
         Task<Song> GetSong(int id);
         Task CreateSong(Song item);
         public Task Delete(int id);
