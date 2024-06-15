@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Music_portal.Models;
@@ -27,7 +28,8 @@ namespace Music_portal.TagHelpers
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             output.TagName = "a";
-            string? url = urlHelper.Action(Action, new { sortOrder = Property });
+            output.Attributes.Add("class", "linkSort");
+			string? url = urlHelper.Action(Action, new { sortOrder = Property });
             output.Attributes.SetAttribute("href", url);
             // если текущее свойство имеет значение CurrentSort
             if (Current == Property)
