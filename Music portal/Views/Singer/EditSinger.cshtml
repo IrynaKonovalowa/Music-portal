@@ -6,24 +6,24 @@
 }
 
 <div>
-    <div class="name">Edit singer:</div>
+    <div class="name">@Resources.Resource.EditSinger:</div>
     <div>
         <div class="col-md-4">
             <form asp-action="EditSinger" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Name</label>
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <br />
                 <div style=" display:flex">
                     <div class=" but">
-                        <input class ="sub" type="submit" value="Save" />
+                        <input class="sub" type="submit" value="@Resources.Resource.Save" />
                     </div>
                     <div class="but">
-                        <a asp-action="Singers" class="link">Back to the list</a>
+                        <a asp-action="Singers" class="link">@Resources.Resource.BackToList</a>
                     </div>
                 </div>
             </form>

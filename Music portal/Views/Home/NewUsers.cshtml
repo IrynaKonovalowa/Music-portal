@@ -11,19 +11,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    @Resources.Resource.FirstName                    
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastName)
+                    @Resources.Resource.LastName                    
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Login)
+                    @Resources.Resource.Login                    
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Email)
+                    @Resources.Resource.Email                   
                 </th>    
                 <th>
-                    @Html.DisplayNameFor(model => model.Access)
+                    @Resources.Resource.Access                  
                 </th>
             </tr>
         </thead>
@@ -49,8 +49,8 @@
                             @Html.DisplayFor(modelItem => item.Access)
                     </td>
                     <td>
-                            <a asp-controller="Home" asp-action="EditUser" asp-route-id="@item.Id" class="link">Edit</a> |
-                            <a asp-controller="Home" asp-action="DeleteUser" asp-route-id="@item.Id" class="link">Delete</a>
+                            <a asp-controller="Home" asp-action="EditUser" asp-route-id="@item.Id" class="link">@Resources.Resource.Edit</a> |
+                            <a asp-controller="Home" asp-action="DeleteUser" asp-route-id="@item.Id" class="link">@Resources.Resource.Delete</a>
                     </td>
                 </tr> 
             }
@@ -59,5 +59,5 @@
     </table>
 </div>
 <div class="but" style=" margin-left: 680px;">
-    <a asp-controller="Home" asp-action="Index" class="link">Back to list of songs</a>
+    <a asp-controller="Home" asp-action="Index" class="link">@Resources.Resource.BackToList</a>
 </div>

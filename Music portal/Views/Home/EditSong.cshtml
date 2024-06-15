@@ -6,42 +6,42 @@
 }
 
 <div>
-    <div class="name">Edit song:</div>
+    <div class="name">@Resources.Resource.EditSong:</div>
     <div>
         <div class="col-md-4">
             <form asp-action="EditSong" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                  <input type="hidden" asp-for="Id" /> 
                 <div class="form-group">
-                    <label asp-for="Title" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Title</label>
                     <input asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Year" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Year</label>
                     <input asp-for="Year" class="form-control" />
                     <span asp-validation-for="Year" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Genre" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Genre</label>
                     <select asp-for="GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Singer" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Singer</label>
                     <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
                 </div>
                 <div class="form-group">
-                    <p><label asp-for="PathToFile" class="control-label labl"></label></p>
+                    <p><label class="control-label labl">@Resources.Resource.PathToFile</label></p>
                     <input class="form-control" type="file" name="uploadedFile" />
                     <span asp-validation-for="PathToFile" class="text-danger"></span>
                 </div>
                 <br />
                 <div style=" display:flex">
                     <div class=" but">
-                        <input class ="sub" type="submit" value="Save" />
+                        <input class="sub" type="submit" value="@Resources.Resource.Save" />
                     </div>
                     <div class="but">
-                        <a asp-action="Index" class="link">Back to the list</a>
+                        <a asp-action="Index" class="link">@Resources.Resource.BackToList</a>
                     </div>
                 </div>
             </form>

@@ -5,41 +5,41 @@
 }
 
 <div>
-    <div class="name">Edit user:</div>
+    <div class="name">@Resources.Resource.EditUser:</div>
     <div>
         <div class="col-md-4">
             <form asp-action="EditUser" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label asp-for="FirstName" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.FirstName</label>
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="LastName" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.LastName</label>
                     <input asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div><div class="form-group">
-                    <label asp-for="Login" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Login</label>
                     <input asp-for="Login" class="form-control" />
                     <span asp-validation-for="Login" class="text-danger"></span>
                 </div><div class="form-group">
-                    <label asp-for="Email" class="control-label labl"></label>
+                    <label asp-for="Email" class="control-label labl">@Resources.Resource.Email</label>
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div><div class="form-group">
-                    <label asp-for="Access" class="control-label labl"></label>
+                    <label class="control-label labl">@Resources.Resource.Access</label>
                     <input asp-for="Access" class="form-control" />
                     <span asp-validation-for="Access" class="text-danger"></span>
                 </div>
                 <br />
                 <div style=" display:flex">
                     <div class=" but">
-                        <input class ="sub" type="submit" value="Save" />
+                        <input class="sub" type="submit" value="@Resources.Resource.Save" />
                     </div>
                     <div class="but">
-                        <a asp-action="NewUsers" class="link">Back to the list</a>
+                        <a asp-action="NewUsers" class="link">@Resources.Resource.BackToList</a>
                     </div>
                 </div>
             </form>

@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Singers";
 }
-<div class="name">Singers</div>
+<div class="name">@Resources.Resource.Singers</div>
 <hr />
 
     <div>
@@ -12,7 +12,7 @@
         <span></span>
         <span></span>
         <span></span>
-        Add Singer
+        @Resources.Resource.AddSinger
     </a>
     </div>
 
@@ -21,7 +21,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Resources.Resource.Name                    
                 </th>
             </tr>
         </thead>
@@ -35,8 +35,8 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                         <td>
-                            <a asp-action="EditSinger" asp-route-id="@item.Id" class="link">Edit</a> |
-                            <a asp-action="DeleteSinger" asp-route-id="@item.Id" class="link">Delete</a>
+                            <a asp-action="EditSinger" asp-route-id="@item.Id" class="link">@Resources.Resource.Edit</a> |
+                            <a asp-action="DeleteSinger" asp-route-id="@item.Id" class="link">@Resources.Resource.Delete</a>
                         </td>
                 </tr> 
             }
@@ -45,5 +45,5 @@
     </table>
 </div>
 <div class="but" style=" margin-left: 330px;">
-    <a asp-controller="Home" asp-action="Index" class="link">Back to list of songs</a>
+    <a asp-controller="Home" asp-action="Index" class="link">@Resources.Resource.BackToList</a>
 </div>

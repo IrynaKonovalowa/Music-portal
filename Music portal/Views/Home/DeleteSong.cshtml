@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="name">Delete song:</div>
+<div class="name">@Resources.Resource.DeleteSong:</div>
 
-<h3 class="del">Are you sure you want to delete this song?</h3>
+<h3 class="del">@Resources.Resource.DeleteConfirm</h3>
 <br />
 <div>
-    <h4 class="del">Song:</h4>
+    <h4 class="del">@Resources.Resource.Song:</h4>
         <div class = "del">
             @Html.DisplayFor(model => model.Title)
         </div>
@@ -19,10 +19,10 @@
         <input type="hidden" asp-for="Id" />        
         <div style=" display:flex">
             <div class=" but">
-                <input class="sub" type="submit" value="Delete" />
+                <input class="sub" type="submit" value="@Resources.Resource.Delete" />
             </div>
             <div class="but">
-                <a asp-action="Index" class="link">Back to the list</a>
+                <a asp-action="Index" class="link">@Resources.Resource.BackToList</a>
             </div>
         </div>    
     </form>

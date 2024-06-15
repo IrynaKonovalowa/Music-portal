@@ -8,11 +8,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="margin-left: 1100px;" class="search">
-    <form asp-action="SearchSong">
-        <input type="text" name="search" placeholder="Search a song" />
-        <button type="submit" />
-    </form>
+<div style="margin-left: 1100px;" class="search">   
+    <form metod ="get" asp-action="Index">
+        <input type="text" name="text" placeholder="@Resources.Resource.SearchSong" />
+        <button type="submit" name="submit"/>
+    </form> 
 </div>
 
 
@@ -20,13 +20,13 @@
 { 
     <div style="display: flex; margin-left: 600px;">    
     <div class="but">
-        <a class="link" asp-controller="Genre" asp-action="Genres">Genres</a>
+            <a class="link" asp-controller="Genre" asp-action="Genres">@Resources.Resource.Genres</a>
     </div>
     <div class="but">
-        <a class="link" asp-controller="Singer" asp-action="Singers">Singers</a>
+            <a class="link" asp-controller="Singer" asp-action="Singers">@Resources.Resource.Singers</a>
     </div>
     <div class="but">
-        <a class="link" asp-controller="Home" asp-action="NewUsers">Users</a>
+            <a class="link" asp-controller="Home" asp-action="NewUsers">@Resources.Resource.Users</a>
     </div>
     </div>
  } 
@@ -39,7 +39,7 @@
             <span></span>
             <span></span>
             <span></span>
-            Add song
+            @Resources.Resource.AddSong
         </a>
     </div>
 }
@@ -48,15 +48,15 @@
 <form method="get">    
     <div style="display: flex; vertical-align: bottom; margin-left: 95px;">
         <div >
-        <label class="control-label labl filtlabl">Singer: </label>
+            <label class="control-label labl filtlabl">@Resources.Resource.Singer: </label>
         <select class="form-control filt" name="singer" asp-items="Model.FilterViewModel.Singers"></select>
         </div>
         <div >
-            <label class="control-label labl filtlabl">Genre: </label>
+            <label class="control-label labl filtlabl">@Resources.Resource.Genre: </label>
         <select class="form-control filt" name="genre" asp-items="Model.FilterViewModel.Genres"></select>
         </div>
         <div class="divbutfilt">
-            <input type="submit" class="butfilt" value="Filter" />
+            <input type="submit" class="butfilt" value="@Resources.Resource.Filter" />
         </div>
 
     </div>
@@ -68,22 +68,26 @@
             <tr>
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
-                    property="@Model.SortViewModel.TitleSort">Title
+                                 property="@Model.SortViewModel.TitleSort">
+                        @Resources.Resource.Title
                     </sort-header>
                 </th>
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
-                    property="@Model.SortViewModel.SingerSort">Singer
+                                 property="@Model.SortViewModel.SingerSort">
+                        @Resources.Resource.Singer
                     </sort-header>
                 </th>               
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
-                    property="@Model.SortViewModel.GenreSort"> Genre
+                                 property="@Model.SortViewModel.GenreSort">
+                        @Resources.Resource.Genre
                     </sort-header>
                 </th>
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
-                    property="@Model.SortViewModel.YearSort"> Year
+                                 property="@Model.SortViewModel.YearSort">
+                        @Resources.Resource.Year
                     </sort-header>
                 </th>                
             </tr>
@@ -117,11 +121,11 @@
                             <td>
                             @if (Context.Session.GetString("Login") == "admin")
                             {
-                                <a asp-controller="Home" asp-action="EditSong" asp-route-id="@item.Id" class="link">Edit |</a>
+                                <a asp-controller="Home" asp-action="EditSong" asp-route-id="@item.Id" class="link">@Resources.Resource.Edit |</a>
                             }                            
                             @if (Context.Session.GetString("Login") == "admin")
-                            {   
-                                <a asp-controller = "Home" asp-action = "DeleteSong" asp-route-id = "@item.Id" class="link">Delete</a> 
+                            {
+                                <a asp-controller="Home" asp-action="DeleteSong" asp-route-id="@item.Id" class="link">@Resources.Resource.Delete</a>
                             }
                             </td>                        
                 </tr> 

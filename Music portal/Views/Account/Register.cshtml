@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="name"><span>Registration</span></div>
+<div class="name"><span>@Resources.Resource.Registration</span></div>
 
 <hr />
 <div class="row">
@@ -13,38 +13,38 @@
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label labl"></label>
+                <label class="control-label labl">@Resources.Resource.FirstName</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label labl"></label>
+                <label class="control-label labl">@Resources.Resource.LastName</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Login" class="control-label labl"></label>
+                <label class="control-label labl">@Resources.Resource.Login</label>
                 <input asp-for="Login" class="form-control" />
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label labl"></label>
+                <label class="control-label labl">@Resources.Resource.Email</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label labl"></label>
+                <label class="control-label labl">@Resources.Resource.Password</label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PasswordConfirm" class="control-label labl"></label>
+                <label class="control-label labl">@Resources.Resource.PasswordConfirm</label>
                 <input asp-for="PasswordConfirm" class="form-control" />
                 <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
             </div>
             <br />
             <div class="but">
-                <input class="sub" type="submit" value="Check in" />
+                <input class="sub" type="submit" value="@Resources.Resource.Register" />
             </div>
         </form>
     </div>

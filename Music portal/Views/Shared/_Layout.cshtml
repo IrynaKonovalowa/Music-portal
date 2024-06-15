@@ -15,16 +15,28 @@
                                
                 @if (Context.Session.GetString("Login") == null)
                 {
-                    <a class="navbar-brand" style="color: white" asp-area="" asp-controller="Account" asp-action="Register">Registration</a>
-                    <a class="navbar-brand" style="color: white" asp-area="" asp-controller="Account" asp-action="Login">Authorization</a>
+                    <a class="navbar-brand" style="color: white" asp-area="" asp-controller="Account" asp-action="Register">@Resources.Resource.Registration</a>
+                    <a class="navbar-brand" style="color: white" asp-area="" asp-controller="Account" asp-action="Login">@Resources.Resource.Authorization</a>
                 } 
                  else
-                { 
-                     <a class="navbar-brand" style="color: white" asp-area="" asp-controller="Account" asp-action="Logout">Exit</a>
-                    <div class="hello"><span>Hello, @Context.Session.GetString("Login")</span></div>
+                {
+                    <a class="navbar-brand" style="color: white" asp-area="" asp-controller="Account" asp-action="Logout">@Resources.Resource.Exit</a>
+                    <div class="hello"><span>@Resources.Resource.Hello, @Context.Session.GetString("Login")</span></div>
 				}
                 <div class="gif"></div>
-                <div class="MusPortal">Music portal</div>                
+                <div class="MusPortal">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="linkMusPl">@Resources.Resource.MusicPortal</a>
+                </div>  
+                @using (Html.BeginForm("ChangeCulture", "Home"))
+                {
+                    <select name="lang" style="width:130px; height: 27px; padding: 1px;"class="form-control">                        
+                        <option value="en">English</option>
+                        <option value="uk">Українська</option>
+                        <option value="de">Deutsch</option>
+                        <option value="fr">Français</option>
+                    </select>
+                    <input type="submit" name="submit" value="@Resources.Resource.ChooseLang" class="butLang">
+                }
             </div>
         </nav>
     </header>
