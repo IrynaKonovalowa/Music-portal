@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Music_portal.Filters;
 using Music_portal.Models;
 using Music_portal.Repository;
 using System.Diagnostics;
 
 namespace Music_portal.Controllers
 {
+    [Culture]
     public class GenreController : Controller
     {
         

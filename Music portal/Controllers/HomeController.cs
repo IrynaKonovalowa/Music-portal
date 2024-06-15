@@ -5,9 +5,14 @@ using Music_portal.Models;
 using Music_portal.Repository;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Music_portal.Filters;
+using System.Linq;
+using Microsoft.IdentityModel.Tokens;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Music_portal.Controllers
 {
+    [Culture]
     public class HomeController : Controller
     {
         
@@ -26,26 +31,26 @@ namespace Music_portal.Controllers
 			_appEnvironment =appEnvironment;
         }
 
-        public async Task<IActionResult> Index(/*string singer,*/ int singer = 0, int genre = 0, int page = 1,
-            SortState sortOrder = SortState.TitleAsc)
+        public async Task<IActionResult> Index(string text, int singer = 0, int genre = 0, int page = 1,
+            SortState sortOrder = SortState.TitleAsc )
         {
-
-            //var model = await repo.GetSongList();
-            //return View(model);
-
+            HttpContext.Session.SetString("path", Request.Path);
+           
             int pageSize = 5;
 
             //фильтрация
             IQueryable<Song> songs = await repo.GetSongList();
 
+            if (text != null)
+            {
+                songs = songs.Where(p => p.Title.Contains(text));
+            }
+
             if (genre != 0)
             {
                 songs = songs.Where(p => p.GenreId == genre);
             }
-            //if (!string.IsNullOrEmpty(singer))
-            //{
-            //    songs = songs.Where(p => p.Singer == singer);
-            //}
+            
             if (singer != 0)
             {
                 songs = songs.Where(p => p.SingerId == singer);
@@ -73,13 +78,14 @@ namespace Music_portal.Controllers
                 items,
                 new PageViewModel(count, page, pageSize),
                 new FilterViewModel(await gRepo.GetGenreList(), await sRepo.GetSingerList(), genre, singer),
-                new SortViewModel(sortOrder)
-            );
+                new SortViewModel(sortOrder)                            
+            ) ;
             return View(viewModel);
         }
 
         public IActionResult CreateSong()
         {
+            HttpContext.Session.SetString("path", Request.Path);
             ViewData["GenreId"] = new SelectList(gRepo.Genres(), "Id", "Name");
             ViewData["SingerId"] = new SelectList(sRepo.Singers(), "Id", "Name");
             return View();
@@ -122,6 +128,8 @@ namespace Music_portal.Controllers
         }
         public async Task<IActionResult> EditSong(int? id)
         {
+            HttpContext.Session.SetString("path", Request.Path);
+
             if (id == null || await repo.GetSongList() == null)
             {
                 return NotFound();
@@ -198,6 +206,8 @@ namespace Music_portal.Controllers
 
         public async Task<IActionResult> DeleteSong(int? id)
         {
+            HttpContext.Session.SetString("path", Request.Path);
+
             if (id == null || await repo.GetSongList() == null)
             {
                 return NotFound();
@@ -229,11 +239,15 @@ namespace Music_portal.Controllers
         }
 		public async Task<IActionResult> NewUsers()
 		{
-		    var model = await userRepo.GetNewUsersList();
+            HttpContext.Session.SetString("path", Request.Path);
+
+            var model = await userRepo.GetNewUsersList();
             return View(model);
 		}
         public async Task<IActionResult> EditUser(int? id)
         {
+            HttpContext.Session.SetString("path", Request.Path);
+
             if (id == null || await userRepo.GetUserList() == null)
             {
                 return NotFound();
@@ -291,6 +305,8 @@ namespace Music_portal.Controllers
 
         public async Task<IActionResult> DeleteUser(int? id)
         {
+            HttpContext.Session.SetString("path", Request.Path);
+
             if (id == null || await userRepo.GetUserList() == null)
             {
                 return NotFound();
@@ -321,6 +337,21 @@ namespace Music_portal.Controllers
             await userRepo.Save();
             return RedirectToAction(nameof(NewUsers));
         }
+        public ActionResult ChangeCulture(string lang)
+        {
+            string? returnUrl = HttpContext.Session.GetString("path") ?? "/Home/Index";
 
+            // Список культур
+            List<string> cultures = new List<string>() {"en", "uk", "de", "fr" };
+            if (!cultures.Contains(lang))
+            {
+                lang = "en";
+            }
+
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddDays(10); // срок хранения куки - 10 дней
+            Response.Cookies.Append("lang", lang, option); // создание куки
+            return Redirect(returnUrl);
+        }
     }
 }

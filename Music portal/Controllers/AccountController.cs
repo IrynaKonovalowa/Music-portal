@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using Music_portal.Filters;
 
 namespace Music_portal.Controllers
 {
+    [Culture]
     public class AccountController: Controller
     {
         IUserRepository repo;
@@ -28,13 +30,13 @@ namespace Music_portal.Controllers
             {
                 if (await repo.GetUserList() == null)
                 {
-                    ModelState.AddModelError("", "Wrong login or password!");
+                    ModelState.AddModelError("", @Resources.Resource.WrongLogin);
                     return View(logon);
                 }
                 var user = await repo.GetUser(logon.Login);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Wrong login or password!");
+                    ModelState.AddModelError("", @Resources.Resource.WrongLogin);
                     return View(logon);
                 }
                 
@@ -52,7 +54,7 @@ namespace Music_portal.Controllers
 
                 if (user.Password != hash.ToString())
                 {
-                    ModelState.AddModelError("", "Wrong login or password!");
+                    ModelState.AddModelError("", @Resources.Resource.WrongLogin);
                     return View(logon);
                 }
 
@@ -77,9 +79,9 @@ namespace Music_portal.Controllers
                 if (await repo.GetUser(reg.Login) != null)
                 {    
                      if (reg.Login == "admin")
-						 ModelState.AddModelError("", "It's not possible to register under the login admin!");
+						 ModelState.AddModelError("", @Resources.Resource.RegNotPossibLogAdm);
                      else                                
-					     ModelState.AddModelError("", "This login is already taken!");
+					     ModelState.AddModelError("", @Resources.Resource.LoginTaken);
                      return View(reg);
                 }                  
                
