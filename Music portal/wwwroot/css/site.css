@@ -116,7 +116,7 @@ audio {
 }
 
 .table{
-    width:850px;
+    width:950px;
 }
 .tableG_S {
     width: 400px;
@@ -140,7 +140,23 @@ audio {
 .link {
     text-align: center;
     color: whitesmoke;
+    text-decoration: none;    
+}
+.linkSort {
+    text-align: center;
+    color: whitesmoke;
     text-decoration: none;
+    font-size: 22px;
+}
+.linkMusPl {
+    text-align: center;
+    color: blueviolet;
+    text-decoration: none;
+}
+.butLang{
+    background-color: transparent;
+    color: whitesmoke;
+    border: 0px;
 }
 .name {
     font-size: 32px;
@@ -366,19 +382,7 @@ dt,dd{
 .glyphicon-chevron-up {
     transform: rotate(-135deg);
 }
-/*.glyphicon {
-    display: inline-block;
-    padding: 0 5px;
-}
 
-.glyphicon-chevron-right:after {
-    content: "\00BB";
-}
-
-.glyphicon-chevron-left:before {
-    content: "\00AB";
-}
-*/
 .filt {
     width: 260px;
     margin: 0 10px 10px 10px;
@@ -388,6 +392,7 @@ dt,dd{
 .filtlabl {
     width: 50px;
     display: inline-block;
+    margin-right: 35px;
 }
 .butfilt {
     background-color: transparent;
