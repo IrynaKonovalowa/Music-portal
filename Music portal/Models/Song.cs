@@ -5,9 +5,11 @@ namespace Music_portal.Models
     public class Song
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Field must be set!")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                ErrorMessageResourceName = "FildRequired")]
         public string? Title { get; set; }
-        [Required(ErrorMessage = "Field must be set!")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Resource),
+                ErrorMessageResourceName = "FildRequired")]
         public int Year{ get; set; }
         
         public string? PathToFile { get; set; }
