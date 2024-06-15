@@ -71,24 +71,40 @@
                                  property="@Model.SortViewModel.TitleSort">
                         @Resources.Resource.Title
                     </sort-header>
+                    @* <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.TitleSort)"
+                       asp-route-position="@(Model.FilterViewModel.SelectedGenre)"
+                       asp-route-team="@(Model.FilterViewModel.SelectedSinger)">Title</a> *@
                 </th>
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
                                  property="@Model.SortViewModel.SingerSort">
                         @Resources.Resource.Singer
                     </sort-header>
+                    @* <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.SingerSort)"
+                       asp-route-position="@(Model.FilterViewModel.SelectedGenre)"
+                       asp-route-team="@(Model.FilterViewModel.SelectedSinger)">Singer</a> *@
                 </th>               
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
                                  property="@Model.SortViewModel.GenreSort">
                         @Resources.Resource.Genre
                     </sort-header>
+                    @* <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.GenreSort)"
+                       asp-route-position="@(Model.FilterViewModel.SelectedGenre)"
+                       asp-route-team="@(Model.FilterViewModel.SelectedSinger)">Genre</a> *@
                 </th>
                 <th>
                     <sort-header action="Index" up="@Model.SortViewModel.Up" current="@Model.SortViewModel.Current"
                                  property="@Model.SortViewModel.YearSort">
                         @Resources.Resource.Year
                     </sort-header>
+                    @* <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.YearSort)"
+                       asp-route-position="@(Model.FilterViewModel.SelectedGenre)"
+                       asp-route-team="@(Model.FilterViewModel.SelectedSinger)">Year</a> *@
                 </th>                
             </tr>
         </thead>

@@ -33,12 +33,12 @@ namespace Music_portal.TagHelpers
             tag.AddCssClass("pagination");
 
             // формируем три ссылки - на текущую, предыдущую и следующую
-            TagBuilder currentItem = CreateTag(PageModel.PageNumber, urlHelper);
+            TagBuilder currentItem = CreateTag(urlHelper, PageModel.PageNumber);
 
             // создаем ссылку на предыдущую страницу, если она есть
             if (PageModel.HasPreviousPage)
             {
-                TagBuilder prevItem = CreateTag(PageModel.PageNumber - 1, urlHelper);
+                TagBuilder prevItem = CreateTag(urlHelper, PageModel.PageNumber - 1);
                 tag.InnerHtml.AppendHtml(prevItem);
             }
 
@@ -46,13 +46,13 @@ namespace Music_portal.TagHelpers
             // создаем ссылку на следующую страницу, если она есть
             if (PageModel.HasNextPage)
             {
-                TagBuilder nextItem = CreateTag(PageModel.PageNumber + 1, urlHelper);
+                TagBuilder nextItem = CreateTag(urlHelper, PageModel.PageNumber + 1);
                 tag.InnerHtml.AppendHtml(nextItem);
             }
             output.Content.AppendHtml(tag);
         }
 
-        TagBuilder CreateTag(int pageNumber, IUrlHelper urlHelper)
+        TagBuilder CreateTag(IUrlHelper urlHelper, int pageNumber = 1)
         {
             TagBuilder item = new TagBuilder("li");
             TagBuilder link = new TagBuilder("a");
@@ -62,8 +62,7 @@ namespace Music_portal.TagHelpers
             }
             else
             {
-                PageUrlValues["page"] = pageNumber;
-                link.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+                link.Attributes["href"] = urlHelper.Action(PageAction, new { page = pageNumber });
             }
             item.AddCssClass("page-item");
             link.AddCssClass("page-link");

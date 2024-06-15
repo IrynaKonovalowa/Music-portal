@@ -29,7 +29,7 @@ namespace Music_portal.TagHelpers
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             output.TagName = "a";
             output.Attributes.Add("class", "linkSort");
-			string? url = urlHelper.Action(Action, new { sortOrder = Property });
+            string? url = urlHelper.Action(Action, new { sortOrder = Property });
             output.Attributes.SetAttribute("href", url);
             // если текущее свойство имеет значение CurrentSort
             if (Current == Property)
